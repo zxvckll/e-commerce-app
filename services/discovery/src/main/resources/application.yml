@@ -1,0 +1,10 @@
+# discovery-service.application.yml
+spring:
+  config:
+    # Specifies the config server URL but makes it optional to prevent application failure
+    # if the configuration server is unreachable
+    import: optional:configserver:http://localhost:8888
+  application:
+    # Sets the application name, which will be used to find matching configuration files
+    # (e.g., discovery-service.yml) in the config server
+    name: discovery-service

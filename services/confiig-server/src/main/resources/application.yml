@@ -1,3 +1,4 @@
+# config-server.application.yml
 spring:
   profiles:
     active: native
@@ -7,6 +8,7 @@ spring:
     config:
       server:
         native:
+          # Defines the location where our configuration files are stored
           search-locations: classpath:/configurations
 
 server:

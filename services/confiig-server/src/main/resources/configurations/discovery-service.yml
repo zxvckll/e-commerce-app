@@ -1,0 +1,16 @@
+# discovery-service.yml
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    # Prevents this Eureka server from registering itself as a client
+    # (default behavior is true, which we don't want for a server instance)
+    register-with-eureka: false
+    # Prevents this server from fetching registry information since it's the registry itself
+    fetch-registry: false
+    # Defines the URL where Eureka clients can register themselves
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+
+server:
+  port: 8761
