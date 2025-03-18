@@ -4,10 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,7 +12,7 @@ import java.util.List;
 @RequestMapping("api/v1/product")
 @RequiredArgsConstructor
 public class ProductController {
-    private ProductService service;
+    private final ProductService service;
 
     @PostMapping
     public ResponseEntity<Integer> createProduct(
@@ -25,9 +22,21 @@ public class ProductController {
     }
 
     @PostMapping("/purchase")
-    public ResponseEntity<List<ProductPurhaseResponse>> purchaseProducts(
+    public ResponseEntity<List<ProductPurchaseResponse>> purchaseProducts(
         @RequestBody List<ProductPurchaseRequest> request
     ){
         return ResponseEntity.ok(service.purchaseProduct(request));
+    }
+
+    @GetMapping("/{product-id}")
+    public ResponseEntity<ProductResponse> findById(
+            @PathVariable("product-id") Integer productId
+    ){
+        return ResponseEntity.ok(service.findById(productId));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ProductResponse>> findAll() {
+        return ResponseEntity.ok(service.findAll());
     }
 }
