@@ -1,0 +1,31 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/product
+    username: syamsandi
+    password: syamsandi
+    # Explicitly specifies the PostgreSQL JDBC driver
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      # 'validate' mode verifies that the schema matches the entity definitions
+      # but doesn't modify the database structure
+      ddl-auto: validate
+    database: postgresql
+    # Specifies the SQL dialect to optimize SQL for PostgreSQL
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    # Enables automatic creation of the baseline when running migrations on a non-empty schema
+    baseline-on-migrate: true
+    # Activates Flyway database migration tool
+    enabled: true
+    # Description for the baseline migration
+    baseline-description: "init"
+    # Starting version number for migrations
+    baseline-version: 0
+    # Reuses database credentials from the datasource configuration
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+
+server:
+  # Port on which this service will run
+  port: 8050

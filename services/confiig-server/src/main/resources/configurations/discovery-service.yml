@@ -10,7 +10,7 @@ eureka:
     fetch-registry: false
     # Defines the URL where Eureka clients can register themselves
     service-url:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      default-zone http://${eureka.instance.hostname}:${server.port}/eureka/
 
 server:
   port: 8761
