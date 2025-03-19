@@ -45,7 +45,7 @@ public class ProductService {
             if (product.getAvailableQuantity() < purchaseRequest.quantity()){
                 throw new ProductPurchaseException("Insufficient stock quantity for product with ID:: " + purchaseRequest.productId());
             }
-            Double newAvailableQuantity = product.getAvailableQuantity() - purchaseRequest.quantity();
+            double newAvailableQuantity = product.getAvailableQuantity() - purchaseRequest.quantity();
             product.setAvailableQuantity(newAvailableQuantity);
             repository.save(product);
             responses.add(mapper.toProductPurchaseResponse(product,purchaseRequest.quantity()));

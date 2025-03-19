@@ -31,7 +31,7 @@ public class ProductMapper {
         );
     }
 
-    public ProductPurchaseResponse toProductPurchaseResponse(Product product, Double quantity) {
+    public ProductPurchaseResponse toProductPurchaseResponse(Product product, double quantity) {
         return new ProductPurchaseResponse(
                 product.getId(),
                 product.getName(),

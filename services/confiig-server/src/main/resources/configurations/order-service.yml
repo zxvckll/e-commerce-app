@@ -1,20 +1,38 @@
 spring:
   datasource:
+    # Database connection string for the order database
     url: jdbc:postgresql://localhost:5432/order
     username: syamsandi
     password: syamsandi
+    # PostgreSQL JDBC driver
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
+      # 'create' mode recreates the schema on startup - use with caution in production
       ddl-auto: create
     database: postgresql
+    # SQL dialect optimization for PostgreSQL
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+  kafka:
+    producer:
+      # Kafka broker address
+      bootstrap-servers: localhost:9092
+      # Serializers for message keys and values
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        # The producer needs to inform the consumer of our topic what Object are we sending it
+        # This type mapping is a security measure that ensures only expected object types are deserialized
+        spring.json.type.mapping: orderConfirmation:com.syamsandi.ecommerce.kafka.OrderConfirmation
 
 server:
+  # Port for the order service
   port: 8070
 
 application:
   config:
-    customer-url: http:/localhost:8222/api/v1/customers
-    payment-url: http:/localhost:8222/api/v1/payments
-    product-url: http:/localhost:8222/api/v1/products
+    # Service URLs accessed through API gateway (port 8222)
+    # Note: Missing slashes in URLs - should be 'http://localhost' not 'http:/localhost'
+    customer-url: http://localhost:8222/api/v1/customers
+    payment-url: http://localhost:8222/api/v1/payments
+    product-url: http://localhost:8222/api/v1/products
