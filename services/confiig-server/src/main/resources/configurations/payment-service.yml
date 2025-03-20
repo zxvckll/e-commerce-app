@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/payment
+    username: syamsandi
+    password: syamsandi
+    # Explicitly specifies the PostgreSQL JDBC driver
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    database: postgresql
+    # Specifies the SQL dialect to optimize SQL for PostgreSQL
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  kafka:
+    producer:
+      # Kafka broker address
+      bootstrap-servers: localhost:9092
+      # Serializers for message keys and values
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        # The producer needs to inform the consumer of our topic what Object are we sending it
+        # This type mapping is a security measure that ensures only expected object types are deserialized
+        spring.json.type.mapping: paymentConfirmation:com.syamsandi.ecommerce.notification.PaymentNotificationRequest
+
+server:
+  # Port on which this service will run
+  port: 8060

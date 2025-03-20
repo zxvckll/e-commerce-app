@@ -1,0 +1,55 @@
+spring:
+  data:
+    mongodb:
+      # MongoDB connection settings
+      username: syamsandi
+      password: syamsandi
+      host: localhost
+      port: 27017
+      database: customer
+      # Database used for authentication
+      authentication-database: admin
+  kafka:
+    consumer:
+      # Kafka broker address
+      bootstrap-servers: localhost:9092
+      # Consumer groups for different event types
+      group-id: paymentGroup,orderGroup
+      # Start reading from the beginning of the topic if no offset is found
+      auto-offset-reset: earliest
+      # Deserializers for message keys and values
+      # Note: These should be deserializers, not serializers
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        # Allow deserialization from any package (for development only)
+        # In production, specify only trusted packages for security
+        spring.json.trusted.packages: '*'
+        # Type mappings for JSON deserialization
+        # Maps logical names to actual Java classes
+        spring.json.type.mapping: orderConfirmation:com.syamsandi.ecommerce.kafka.OrderConfirmation,paymentConfirmation:com.syamsandi.ecommerce.notification.PaymentNotificationRequest
+
+  mail:
+    # SMTP server configuration (MailHog for local development)
+    host: localhost
+    port: 1025
+    username: syamsandi
+    password: syamsandi
+    properties:
+      mail:
+        smtp:
+          # Trust all certificates (development only)
+          trust: "*"
+        # Enable authentication
+        auth: true
+        starttls:
+          # Enable TLS encryption
+          enabled: true
+        # Connection timeout settings (in milliseconds)
+        connectiontimeout: 5000
+        timeout: 3000
+        writetimeout: 5000
+
+server:
+  # Port for the notification service
+  port: 8040
