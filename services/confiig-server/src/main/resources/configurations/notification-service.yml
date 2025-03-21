@@ -27,7 +27,7 @@ spring:
         spring.json.trusted.packages: '*'
         # Type mappings for JSON deserialization
         # Maps logical names to actual Java classes
-        spring.json.type.mapping: orderConfirmation:com.syamsandi.ecommerce.kafka.OrderConfirmation,paymentConfirmation:com.syamsandi.ecommerce.notification.PaymentNotificationRequest
+        spring.json.type.mapping: orderConfirmation:com.syamsandi.ecommerce.kafka.order.OrderConfirmation,paymentConfirmation:com.syamsandi.ecommerce.kafka.payment.PaymentConfirmation
 
   mail:
     # SMTP server configuration (MailHog for local development)

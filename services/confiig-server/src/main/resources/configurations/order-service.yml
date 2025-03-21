@@ -9,7 +9,7 @@ spring:
   jpa:
     hibernate:
       # 'create' mode recreates the schema on startup - use with caution in production
-      ddl-auto: create
+      ddl-auto: update
     database: postgresql
     # SQL dialect optimization for PostgreSQL
     database-platform: org.hibernate.dialect.PostgreSQLDialect

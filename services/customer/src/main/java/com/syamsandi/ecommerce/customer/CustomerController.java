@@ -11,7 +11,7 @@ import java.util.List;
 @RequestMapping("/api/v1/customers")
 @RequiredArgsConstructor
 public class CustomerController {
-    private CustomerService customerService;
+    private final CustomerService customerService;
 
     @PostMapping
     public ResponseEntity<String> createCustomer(
